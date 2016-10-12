@@ -1,9 +1,10 @@
 doctype
 html
   head
-    title Dodger.io.ly
+    title VNC Client
     link(type='text/css' rel="stylesheet" href="/css/main.css")
   body
-    canvas(style='border:1px solid #000000;', width='500', height='500' id ='game')
+    canvas(style='border:1px solid #000000;', width='500', height='500' id ='canvas')
 script(src='/socket.io/socket.io.js')
+script(src='/bower_components/socket.io-stream/index.js')
 script(src='/main.js')
