@@ -45,11 +45,11 @@ const recordScreenShots=()=>{
 	getScreenshot().then(()=>{
 		read=fs.createReadStream(`./images/screenshot.png`)
 		.pipe(sharp().resize(640,400)
-			.toFile(`./images/resized.png`,(err,info)=>{
+			.toBuffer(()=>{
 				fs.unlink(`./images/screenshot.png`,()=>{
 					recordScreenShots()
 				})
-			}))
+			})).pipe(process.stdout)
 	})
 
 }
