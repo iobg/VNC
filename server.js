@@ -30,6 +30,7 @@ let currentFile=0
 
 const getScreenshot=()=>{
 	return new Promise((resolve,reject)=>{
+		fs.unlink(`./images/screenshot.png`,()=>{
 		exec(`screencapture ./images/screenshot.png -C`, function (err){
 			if(err){
 				console.log(err)
@@ -37,7 +38,7 @@ const getScreenshot=()=>{
 						}
 						resolve()
 					})
-
+				})
 				})
 			}
 let read;
@@ -47,11 +48,9 @@ const recordScreenShots=()=>{
 		read=fs.createReadStream(`./images/screenshot.png`)
 		.pipe(sharp().resize(640,400)
 			.toBuffer(()=>{
-				fs.unlink(`./images/screenshot.png`,()=>{
-					recordScreenShots()
-				})
-			})).pipe(process.stdout)
-
+					recordScreenShots()		
+		})).pipe(process.stdout)
+	})
 }
 recordScreenShots()
 io.on('connect',socket=>{
