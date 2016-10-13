@@ -26,11 +26,11 @@ server.listen(3000,()=>{
 //screenshot
 const fs = require('fs')
 var exec = require('child_process').exec;
-const currentFile=0
+let currentFile=0
 
 const getScreenshot=()=>{
 	return new Promise((resolve,reject)=>{
-		exec(`screencapture ./images/screenshot${currentFile}.png -C`, function (err){
+		exec(`screencapture ./images/screenshot.png -C`, function (err){
 			if(err){
 				console.log(err)
 				reject()
@@ -40,16 +40,22 @@ const getScreenshot=()=>{
 
 				})
 			}
+let read;
 const recordScreenShots=()=>{
 	getScreenshot().then(()=>{
-		let read = fs.createReadStream(`./images/screenshot${currentFile}.png`)
-			read.pipe(resizeImage)
+		read=fs.createReadStream(`./images/screenshot.png`)
+		.pipe(sharp().resize(640,400)
+			.toFile(`./images/resized.png`,(err,info)=>{
+				console.log('image Resized')
+			}))
 	})
-	setTimeout(recordScreenShots,100)
+	setTimeout(recordScreenShots,1000)
 }
 //this resizes images to less than 10x their original size
 const resizeImage = sharp().resize(640,400)
 .toFile(`./images/resized${currentFile}.png`,(err,info)=>{
+	resizeImage.end()
+	read.end()
 
 })
 
