@@ -30,26 +30,25 @@ let currentFile=0
 
 const getScreenshot=()=>{
 	return new Promise((resolve,reject)=>{
-		fs.unlink(`./images/screenshot.png`,()=>{
-		exec(`screencapture ./images/screenshot.png -C`, function (err){
+		// fs.unlink(`./images/screenshot.jpg`,()=>{
+		exec(`screencapture ./images/screenshot.jpg -C`, function (err){
 			if(err){
 				console.log(err)
 				reject()
 						}
 						resolve()
 					})
-				})
+				// })
 				})
 			}
-let read;
+
 let i=0;
 const recordScreenShots=()=>{
 	getScreenshot().then(()=>{
-		read=fs.createReadStream(`./images/screenshot.png`)
-		.pipe(sharp().resize(640,400)
-			.toBuffer(()=>{
-					recordScreenShots()		
-		})).pipe(process.stdout)
+		let read=fs.createReadStream(`./images/screenshot.jpg`)
+		.pipe(sharp().resize(640,400).pipe(process.stdout))
+					recordScreenShots()
+					console.log(i++)		
 	})
 }
 recordScreenShots()
