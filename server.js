@@ -46,19 +46,13 @@ const recordScreenShots=()=>{
 		read=fs.createReadStream(`./images/screenshot.png`)
 		.pipe(sharp().resize(640,400)
 			.toFile(`./images/resized.png`,(err,info)=>{
-				console.log('image Resized')
+				fs.unlink(`./images/screenshot.png`,()=>{
+					recordScreenShots()
+				})
 			}))
 	})
-	setTimeout(recordScreenShots,1000)
+
 }
-//this resizes images to less than 10x their original size
-const resizeImage = sharp().resize(640,400)
-.toFile(`./images/resized${currentFile}.png`,(err,info)=>{
-	resizeImage.end()
-	read.end()
-
-})
-
 recordScreenShots()
 io.on('connect',socket=>{
 	console.log(`socket connected ${socket.id}`)
