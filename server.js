@@ -25,10 +25,11 @@ server.listen(3000,()=>{
 //screenshot
 const fs = require('fs')
 var exec = require('child_process').exec;
+let currentFrame = 0
 
-const getScreenshot=()=>{
+const getScreenshot=(i)=>{
 	return new Promise((resolve,reject)=>{
-		exec('screencapture screenshot.png -C', function (err){
+		exec(`screencapture screenshot${i}.png -C`, function (err){
 			if(err){
 				console.log(err)
 				reject()
@@ -38,12 +39,14 @@ const getScreenshot=()=>{
 
 				})
 			}
-
-getScreenshot().then(()=>{
-	let read = fs.createReadStream('screenshot.png')
-		read.pipe(process.stdout)
-})
-
+const recordScreenShots=()=>{
+	getScreenshot(currentFrame).then(()=>{
+		let read = fs.createReadStream(`screenshot${currentFrame}.png`)
+			read.pipe(process.stdout)
+	})
+	setTimeout(recordScreenShots,32)
+}
+recordScreenShots()
 io.on('connect',socket=>{
 	console.log(`socket connected ${socket.id}`)
 })
