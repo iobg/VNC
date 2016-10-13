@@ -41,6 +41,7 @@ const getScreenshot=()=>{
 				})
 			}
 let read;
+let i=0;
 const recordScreenShots=()=>{
 	getScreenshot().then(()=>{
 		read=fs.createReadStream(`./images/screenshot.png`)
@@ -50,7 +51,6 @@ const recordScreenShots=()=>{
 					recordScreenShots()
 				})
 			})).pipe(process.stdout)
-	})
 
 }
 recordScreenShots()
