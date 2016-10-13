@@ -6,6 +6,7 @@ const server = Server(app)
 const socketio = require('socket.io')
 const ss = require('socket.io-stream')
 const io = socketio(server)
+const sharp = require('sharp')
 
 
 //server config
@@ -25,11 +26,11 @@ server.listen(3000,()=>{
 //screenshot
 const fs = require('fs')
 var exec = require('child_process').exec;
-let currentFrame = 0
 
-const getScreenshot=(i)=>{
+
+const getScreenshot=()=>{
 	return new Promise((resolve,reject)=>{
-		exec(`screencapture screenshot${i}.png -C`, function (err){
+		exec(`screencapture screenshot.png -C`, function (err){
 			if(err){
 				console.log(err)
 				reject()
@@ -40,12 +41,17 @@ const getScreenshot=(i)=>{
 				})
 			}
 const recordScreenShots=()=>{
-	getScreenshot(currentFrame).then(()=>{
-		let read = fs.createReadStream(`screenshot${currentFrame}.png`)
-			read.pipe(process.stdout)
+	getScreenshot().then(()=>{
+		let read = fs.createReadStream(`screenshot.png`)
+			read.pipe(resizeImage)
 	})
-	setTimeout(recordScreenShots,32)
+	// setTimeout(recordScreenShots,32)
 }
+const resizeImage = sharp().resize(640,400)
+.toFile('resized.png',(err,info)=>{
+
+})
+
 recordScreenShots()
 io.on('connect',socket=>{
 	console.log(`socket connected ${socket.id}`)
