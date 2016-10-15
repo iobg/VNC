@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"< /dev/null ffmpeg -f avfoundation -i '1' -preset ultrafast -tune zerolatency -f avi pipe:1 | node index.js"
+    "start":"< /dev/null ffmpeg -f avfoundation -i '1' -preset ultrafast -tune zerolatency -f avi pipe:1 | node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,11 +19,8 @@
   "homepage": "https://github.com/iobg/VNC#readme",
   "dependencies": {
     "express": "^4.14.0",
-    "picture-tube": "^1.0.0",
     "pug": "^2.0.0-beta6",
     "robotjs": "^0.4.4",
-    "sharp": "^0.16.1",
-    "socket.io": "^1.5.0",
-    "socket.io-stream": "^0.9.1"
+    "socket.io": "^1.5.0"
   }
 }
