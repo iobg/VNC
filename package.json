@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"ffmpeg -r 30 -f avfoundation -i '1' -f mp4 stream.mp4"
+    "start":"ffmpeg -r 30 -f avfoundation -i '1' -vf scale=1280:800 -f webm stream.webm"
   },
   "repository": {
     "type": "git",

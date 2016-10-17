@@ -34,15 +34,15 @@ app.get('/',(req,res)=>{
 
 
 app.get('/movie.mp4',(req,res)=>{
-	res.setHeader('206', {
+	res.writeHead('206', {
     'Transfer-Encoding': 'chunked'
    , 'Content-Type': 'video/mp4'
    , 'Content-Length': chunksize
    , 'Accept-Ranges': 'bytes ' + start + "-" + end + "/" + total
 	});
-	let read=fs.createReadStream('stream.mp4')
-	read.on('data',chunk=>{
-		res.send(chunk)
+	let read=fs.createReadStream('./stream.mp4')
+	read.on('open',chunk=>{
+		read.pipe(process.stdout)
 	})
 })
 
