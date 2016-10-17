@@ -22,27 +22,26 @@ var chunksize = (end-start)+1;
 
 
 //server config
-app.set('view engine', 'pug')
+
 //middleware
 app.use(express.static('public'))
 
 app.get('/',(req,res)=>{
-	res.render('index')
-
+	res.sendFile('views/index.html' , { root : __dirname})
 
 })
 
 
-app.get('/movie.mp4',(req,res)=>{
+app.get('/stream.m3u8',(req,res)=>{
 	res.writeHead('206', {
     'Transfer-Encoding': 'chunked'
    , 'Content-Type': 'video/mp4'
    , 'Content-Length': chunksize
    , 'Accept-Ranges': 'bytes ' + start + "-" + end + "/" + total
 	});
-	let read=fs.createReadStream('./stream.mp4')
+	let read=fs.createReadStream('./stream.m3u8')
 	read.on('open',chunk=>{
-		read.pipe(process.stdout)
+		read.pipe(res)
 	})
 })
 
