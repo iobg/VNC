@@ -4,8 +4,9 @@ const app = express()
 const { Server }= require('http')
 const server = Server(app)
 const socketio = require('socket.io')
-var stdin = process.openStdin()
-var total = 999999999         // fake a large file
+const fs = require('fs')
+
+var total = 100000000     // fake a large file
 var partialstart = 0
 var partialend = total - 1
 
@@ -32,17 +33,17 @@ app.get('/',(req,res)=>{
 })
 
 
-app.get('/movie.avi',(req,res)=>{
-	res.writeHead(206, {
+app.get('/movie.mp4',(req,res)=>{
+	res.setHeader('206', {
     'Transfer-Encoding': 'chunked'
-   , 'Content-Type': 'video/avi'
+   , 'Content-Type': 'video/mp4'
    , 'Content-Length': chunksize
    , 'Accept-Ranges': 'bytes ' + start + "-" + end + "/" + total
 	});
-	stdin.on('data', chunk=>{
-		stdin.pipe(res)
-})
-
+	let read=fs.createReadStream('stream.mp4')
+	read.on('data',chunk=>{
+		res.send(chunk)
+	})
 })
 
 

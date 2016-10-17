@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"< /dev/null ffmpeg -f avfoundation -i '1' -preset ultrafast -tune zerolatency -f avi pipe:1 | node server.js"
+    "start":"ffmpeg -r 30 -f avfoundation -i '1' -f mp4 stream.mp4"
   },
   "repository": {
     "type": "git",
