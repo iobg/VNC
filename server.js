@@ -40,8 +40,8 @@ app.get('/stream.m3u8',(req,res)=>{
    , 'Accept-Ranges': 'bytes ' + start + "-" + end + "/" + total
 	});
 	let read=fs.createReadStream('./stream.m3u8')
-	read.on('open',chunk=>{
-		read.pipe(res)
+	read.on('data',chunk=>{
+		res.send(res)
 	})
 })
 
