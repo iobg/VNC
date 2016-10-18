@@ -5,6 +5,7 @@ const { Server }= require('http')
 const server = Server(app)
 const socketio = require('socket.io')
 const fs = require('fs')
+const request = require('request')
 
 
 //server config
@@ -16,6 +17,15 @@ app.get('/',(req,res)=>{
 	res.sendFile('views/index.html' , { root : __dirname})
 
 })
+app.get('/stream.m3u8',(req,res)=>{
+	fs.createReadStream('videostream/stream.m3u8').on('data').pipe(res)
+})
+app.get('/:streamSegment',(req,res)=>{
+	fs.createReadStream(`videostream/${req.params.streamSegment}`).pipe(res)
+})
+
+
+
 
 server.listen(3000,()=>{
 	console.log('server listening')

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"ffmpeg -r 30 -f avfoundation -i '1' -vf scale=1280:800 -preset ultrafast -g 0.5 -hls_flags delete_segments -f hls -hls_time 0.5 -hls_list_size 1 -hls_allow_cache 0 -hls_segment_filename 'public/file%03d.ts' public/stream.m3u8"
+    "start": "ffmpeg -r 30 -f avfoundation -i '1' -vf scale=1280:800 -preset ultrafast -g 1 -hls_flags delete_segments -f hls -hls_time 1 -hls_list_size 1 -hls_allow_cache 0 -hls_segment_filename 'videostream/file%03d.ts' videostream/stream.m3u8"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "dependencies": {
     "express": "^4.14.0",
     "pug": "^2.0.0-beta6",
+    "request": "^2.75.0",
     "robotjs": "^0.4.4",
     "socket.io": "^1.5.0"
   }
