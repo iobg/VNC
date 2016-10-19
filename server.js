@@ -4,16 +4,19 @@ const app = express()
 const { Server }= require('http')
 const server = Server(app)
 const socketio = require('socket.io')
+const io = socketio(server)
 const fs = require('fs')
-const request = require('request')
+const robot = require('robotjs')
+
 const cors = require('cors')
 
 
-//server config
 
 //middleware
 app.use(express.static('public'))
 app.use(cors())
+
+//routes
 app.get('/',(req,res)=>{
 	res.sendFile('views/index.html' , { root : __dirname})
 
@@ -29,6 +32,16 @@ app.get('/:streamSegment',(req,res)=>{
 server.listen(3000,()=>{
 	console.log('server listening')
 		
+})
+
+io.on('connect',socket=>{
+
+	socket.on('mouseClick',()=>{
+		robot.mouseClick()
+	})
+	socket.on('clientMouseMove',mouseObj=>{
+		robot.moveMouse(mouseObj.x,mouseObj.y)
+	})
 })
 
 

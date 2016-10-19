@@ -1,6 +1,7 @@
+const socket = io()
+const video = document.getElementById('video');
 
   if(Hls.isSupported()) {
-    var video = document.getElementById('video');
     var hls = new Hls({capLevelToPlayerSize:true});
     hls.loadSource('/stream.m3u8');
     hls.attachMedia(video);
@@ -9,3 +10,13 @@
   });
  }
 
+video.addEventListener('click',()=>{
+	socket.emit('mouseClick',clickObj)
+})
+
+video.addEventListener('mousemove',()=>{
+	mouseObj = {}
+	mouseObj.x = event.layerX
+	mouseObj.y = event.layerY
+	socket.emit('clientMouseMove',mouseObj)
+})
