@@ -37,6 +37,7 @@ server.listen(3000,()=>{
 io.on('connect',socket=>{
 
 	socket.on('mouseClick',()=>{
+		console.log('click')
 		robot.mouseClick()
 	})
 	socket.on('clientMouseMove',mouseObj=>{
