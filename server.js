@@ -11,7 +11,8 @@ const robot = require('robotjs')
 const cors = require('cors')
 
 //middleware
-app.use(express.static('public'))
+
+app.use(express.static('public'));
 app.use(cors())
 
 //routes
