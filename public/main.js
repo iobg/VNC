@@ -11,7 +11,7 @@ const video = document.getElementById('video');
  }
 
 video.addEventListener('click',()=>{
-	socket.emit('mouseClick',clickObj)
+	socket.emit('mouseClick')
 })
 
 video.addEventListener('mousemove',()=>{
