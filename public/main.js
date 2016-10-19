@@ -11,7 +11,7 @@ const video = document.getElementById('video');
  }
 
 video.addEventListener('click',()=>{
-	socket.emit('mouseClick')
+	socket.emit('clientMouseClick')
 })
 
 video.addEventListener('mousemove',()=>{
@@ -20,3 +20,7 @@ video.addEventListener('mousemove',()=>{
 	mouseObj.y = event.layerY
 	socket.emit('clientMouseMove',mouseObj)
 })
+window.addEventListener('keydown',()=>{
+  socket.emit('clientKeyPress',event.key)
+  })
+

@@ -10,8 +10,6 @@ const robot = require('robotjs')
 
 const cors = require('cors')
 
-
-
 //middleware
 app.use(express.static('public'))
 app.use(cors())
@@ -36,11 +34,14 @@ server.listen(3000,()=>{
 
 io.on('connect',socket=>{
 
-	socket.on('mouseClick',()=>{
+	socket.on('clientMouseClick',()=>{
 		robot.mouseClick()
 	})
 	socket.on('clientMouseMove',mouseObj=>{
 		robot.moveMouse(mouseObj.x,mouseObj.y)
+	})
+	socket.on('clientKeyPress',key=>{
+		robot.keyTap(key)
 	})
 })
 
