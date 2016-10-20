@@ -25,7 +25,10 @@ app.get('/stream.m3u8',(req,res)=>{
 })
 app.get('/:streamSegment',(req,res)=>{
 	console.log('segment loading')
-	fs.createReadStream(`videostream/${req.params.streamSegment}`).pipe(res)
+		let read=fs.createReadStream(`videostream/${req.params.streamSegment}`)
+		read.on('error',console.log)
+		read.pipe(res)
+	
 })
 
 server.listen(3000,()=>{
@@ -42,7 +45,10 @@ io.on('connect',socket=>{
 		robot.moveMouse(mouseObj.x,mouseObj.y)
 	})
 	socket.on('clientKeyPress',key=>{
-		robot.keyTap(key)
+		if(key==='Enter'){
+			robot.keyTap('enter')
+		}
+		else robot.keyTap(key)
 	})
 })
 

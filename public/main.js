@@ -14,13 +14,13 @@ video.addEventListener('click',()=>{
 	socket.emit('clientMouseClick')
 })
 
-video.addEventListener('mousemove',()=>{
+video.addEventListener('mousemove',event=>{
 	mouseObj = {}
 	mouseObj.x = event.layerX
 	mouseObj.y = event.layerY
 	socket.emit('clientMouseMove',mouseObj)
 })
-window.addEventListener('keydown',()=>{
+window.addEventListener('keydown',event=>{
   socket.emit('clientKeyPress',event.key)
   })
 
