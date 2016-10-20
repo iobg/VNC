@@ -1,8 +1,17 @@
 
 <h1> Hello</h1>
-<video id="video" width='1280' height='800' Content-Type='application/vnd.apple.mpegurl'></video>
+<video id="video" width='1280' height='800' autoplay></video>
 
-<script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
+<!-- only needed for manual HLS level selection -->
+<link rel="stylesheet" href="//releases.flowplayer.org/quality-selector/flowplayer.quality-selector.css">
+ 
+
+ 
+
+<script src="//releases.flowplayer.org/6.0.5/flowplayer.min.js"></script>
+
+<script src="//releases.flowplayer.org/hlsjs/flowplayer.hlsjs.min.js"></script>
+
 <script src="/socket.io/socket.io.js"></script>
 <script src='main.js'></script>
 

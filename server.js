@@ -13,16 +13,21 @@ const cors = require('cors')
 
 //middleware
 let args = ['-r','24','-f','avfoundation',
-					 '-capture_cursor','1','-i','1',
+					  '-pixel_format','yuv420p','-i','1',
+					  '-vcodec','h264',
 					  '-vf','scale=1280:800','-preset','ultrafast',
 					  '-tune','zerolatency','-g','0', 
-					  '-hls_flags','delete_segments','-f','hls',
+					  '-hls_flags','delete_segments',
 					  '-hls_time','0.5','-hls_list_size','2', 
-					  '-hls_allow_cache','0','-hls_segment_filename',
-					  'videostream/file%03d.ts','videostream/stream.m3u8']
+					  '-hls_allow_cache','0','-segment_list_flags','live',
+					  '-increment_tc', '1',
+					  '-hls_segment_filename','videostream/file%03d.ts','videostream/stream.m3u8']
 
 let recording= spawn('ffmpeg', args )
 console.log('video recording')
+recording.stderr.on('data', data=>{
+	console.log(data.toString())
+})
 app.use(express.static('public'));
 app.use(cors())
 
@@ -36,7 +41,9 @@ app.get('/stream.m3u8',(req,res)=>{
 })
 app.get('/:streamSegment',(req,res)=>{
 		let read=fs.createReadStream(`videostream/${req.params.streamSegment}`)
-		read.on('error',console.log)
+		read.on('error',()=>{
+			return true
+		})
 		read.pipe(res)
 	
 })
@@ -55,8 +62,8 @@ io.on('connect',socket=>{
 		robot.moveMouse(mouseObj.x,mouseObj.y)
 	})
 	socket.on('clientKeyPress',key=>{
-		if(key==='Enter'){
-			robot.keyTap('enter')
+		if(key.length >1){
+			robot.keyTap(key.toLowerCase())
 		}
 		else robot.keyTap(key)
 	})
