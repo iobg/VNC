@@ -24,10 +24,7 @@ let args = ['-r','24','-f','avfoundation',
 					  '-hls_segment_filename','videostream/file%03d.ts','videostream/stream.m3u8']
 
 let recording= spawn('ffmpeg', args )
-console.log('video recording')
-recording.stderr.on('data', data=>{
-	console.log(data.toString())
-})
+
 app.use(express.static('public'));
 app.use(cors())
 
