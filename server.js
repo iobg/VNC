@@ -1,4 +1,5 @@
 'use strict'
+module.exports=()=>{
 const express=require('express')
 const app = express()
 const { Server }= require('http')
@@ -61,5 +62,5 @@ io.on('connect',socket=>{
 	})
 })
 
-
+}
 
