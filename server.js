@@ -1,6 +1,4 @@
 'use strict'
-
-
 const express=require('express')
 const app = express()
 const { Server }= require('http')
@@ -52,8 +50,8 @@ app.get('/stream.m3u8',(req,res)=>{
 })
 app.get('/:streamSegment',(req,res)=>{
 		let read=fs.createReadStream(`videostream/${req.params.streamSegment}`)
-		read.on('error',()=>{
-			return true
+		read.on('error',(err)=>{
+			console.log(err)
 		})
 		read.pipe(res)
 	
@@ -72,10 +70,29 @@ io.on('connect',socket=>{
 		robot.moveMouse(mouseObj.x,mouseObj.y)
 	})
 	socket.on('clientKeyPress',key=>{
-		if(key.length >1){
+		console.log(key)
+		if(key === 'Meta'){
+			robot.keyTap('command')
+		}
+		else if(key === 'ArrowUp'){
+			robot.keyTap('up')
+		}
+		else if(key === 'ArrowDown'){
+			robot.keyTap('down')
+		}
+		else if(key === 'ArrowLeft'){
+			robot.keyTap('left')
+		}
+		else if(key === 'ArrowRight'){
+			robot.keyTap('right')
+		}
+		else if(key.length >1){
 			robot.keyTap(key.toLowerCase())
 		}
 		else robot.keyTap(key)
+	})
+	socket.on('error',(err)=>{
+		console.log(err)
 	})
 })
 }
