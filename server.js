@@ -63,6 +63,7 @@ server.listen(3000,()=>{
 })
 
 io.on('connect',socket=>{
+	let shift=false;
 	socket.on('clientMouseClick',()=>{
 		robot.mouseClick()
 	})
@@ -89,7 +90,16 @@ io.on('connect',socket=>{
 		else if(key.length >1){
 			robot.keyTap(key.toLowerCase())
 		}
-		else robot.keyTap(key)
+		else{
+			if(shift) robot.keyTap(key.toLowerCase(),'shift')
+			robot.keyTap(key)
+		} 
+	})
+	socket.on('shiftPressed',()=>{
+		shift=true;
+	})
+	socket.on('shiftReleased',()=>{
+		shift=false;
 	})
 	socket.on('error',(err)=>{
 		console.log(err)

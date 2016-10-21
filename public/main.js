@@ -22,7 +22,12 @@ video.addEventListener('mousemove',event=>{
 	mouseObj.y = event.layerY
 	socket.emit('clientMouseMove',mouseObj)
 })
-window.addEventListener('keydown',event=>{
+window.addEventListener('keypress',event=>{
   socket.emit('clientKeyPress',event.key)
   })
-
+window.addEventListener('keydown',event=>{
+  if(event.key==="Shift") socket.emit('shiftPressed',event.key)
+  })
+window.addEventListener('keyup',event=>{
+  if(event.key==="Shift") socket.emit('shiftReleased',event.key)
+})
