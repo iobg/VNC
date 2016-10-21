@@ -38,12 +38,13 @@ const endRecording=()=>{
 	recording.kill()
 }
 const startServer=()=>{
+app.set('view engine', 'pug')
 app.use(express.static('public'));
 app.use(cors())
 
 //routes
 app.get('/',(req,res)=>{
-	res.sendFile('views/index.html' , { root : __dirname})
+	res.render('index')
 
 })
 app.get('/stream.m3u8',(req,res)=>{

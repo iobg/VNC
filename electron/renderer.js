@@ -1,6 +1,6 @@
 const startBtn = document.getElementById('startBtn')
 const endBtn = document.getElementById('endBtn')
-const {startServer,closeConnection,startRecording,endRecording} = require('./server')
+const {startServer,closeConnection,startRecording,endRecording} = require('../server')
 
 startBtn.addEventListener('click',()=>{
   startServer()
