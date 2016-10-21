@@ -1,5 +1,6 @@
 'use strict'
-module.exports=()=>{
+
+
 const express=require('express')
 const app = express()
 const { Server }= require('http')
@@ -10,6 +11,9 @@ const fs = require('fs')
 const robot = require('robotjs')
 const { spawn } = require('child_process')
 const cors = require('cors')
+const enableDestroy = require('server-destroy')(server)
+let recording=null
+
 
 //middleware
 let args = ['-r','24','-f','avfoundation',
@@ -19,12 +23,21 @@ let args = ['-r','24','-f','avfoundation',
 					  '-tune','zerolatency','-g','0', 
 					  '-hls_flags','delete_segments',
 					  '-hls_time','0.5','-hls_list_size','2', 
-					  '-hls_allow_cache','0','-segment_list_flags','live',
+					  '-hls_allow_cache','0','-segment_list_flags','+live',
 					  '-increment_tc', '1',
 					  '-hls_segment_filename','videostream/file%03d.ts','videostream/stream.m3u8']
 
-let recording= spawn('ffmpeg', args )
 
+const startRecording=()=>{
+ recording=spawn('ffmpeg', args )
+}
+const closeConnection=()=>{
+	server.destroy()
+}
+const endRecording=()=>{
+	recording.kill()
+}
+const startServer=()=>{
 app.use(express.static('public'));
 app.use(cors())
 
@@ -51,7 +64,6 @@ server.listen(3000,()=>{
 })
 
 io.on('connect',socket=>{
-
 	socket.on('clientMouseClick',()=>{
 		robot.mouseClick()
 	})
@@ -65,6 +77,7 @@ io.on('connect',socket=>{
 		else robot.keyTap(key)
 	})
 })
-
 }
+
+module.exports={startServer,closeConnection,startRecording, endRecording}
 
