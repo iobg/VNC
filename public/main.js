@@ -22,7 +22,7 @@ video.addEventListener('mousemove',event=>{
 	mouseObj.y = event.layerY
 	socket.emit('clientMouseMove',mouseObj)
 })
-window.addEventListener('keypress',event=>{
+window.addEventListener('keydown',event=>{
   socket.emit('clientKeyPress',event.key)
   })
 window.addEventListener('keydown',event=>{

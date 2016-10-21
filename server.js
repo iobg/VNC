@@ -87,7 +87,7 @@ io.on('connect',socket=>{
 		else if(key === 'ArrowRight'){
 			robot.keyTap('right')
 		}
-		else if(key.length >1){
+		else if(key.length > 1){
 			robot.keyTap(key.toLowerCase())
 		}
 		else{
