@@ -10,20 +10,21 @@ const robot = require('robotjs')
 const { spawn } = require('child_process')
 const cors = require('cors')
 const enableDestroy = require('server-destroy')(server)
+const bodyParser = require('body-parser')
 let recording=null
 
 
 //middleware
 let args = ['-r','24','-f','avfoundation',
 					  '-pixel_format','yuv420p','-i','1',
-					  '-vcodec','h264',
-					  '-vf','scale=1280:800','-preset','ultrafast',
-					  '-tune','zerolatency','-g','0', 
-					  '-hls_flags','delete_segments',
+					  '-vcodec','h264','-vf','scale=1280:800',
+					  '-preset','ultrafast','-tune','zerolatency',
+					  '-g','0','-hls_flags','delete_segments',
 					  '-hls_time','0.5','-hls_list_size','2', 
 					  '-hls_allow_cache','0','-segment_list_flags','+live',
 					  '-increment_tc', '1',
-					  '-hls_segment_filename','videostream/file%03d.ts','videostream/stream.m3u8']
+					  '-hls_segment_filename','videostream/file%03d.ts',
+					  'videostream/stream.m3u8']
 
 
 const startRecording=()=>{
@@ -35,14 +36,28 @@ const closeConnection=()=>{
 const endRecording=()=>{
 	recording.kill()
 }
+const makePassword=()=>{
+	return Math.random().toString(36).slice(20)
+}
+const password = makePassword()
+
 const startServer=()=>{
 app.set('view engine', 'pug')
 app.use(express.static('public'));
 app.use(cors())
+app.use(bodyParser())
 
 //routes
 app.get('/',(req,res)=>{
 	res.render('index')
+})
+app.post('/',(req,res)=>{
+	console.log(req.body)
+	if(req.body.password===password){
+		res.render('connection')
+	}
+	else res.render('index',{msg:"Incorrect password entered"})
+	
 
 })
 app.get('/stream.m3u8',(req,res)=>{
@@ -107,5 +122,5 @@ io.on('connect',socket=>{
 })
 }
 
-module.exports={startServer,closeConnection,startRecording, endRecording}
+module.exports={startServer,closeConnection,startRecording, endRecording, password}
 
