@@ -1,17 +1,18 @@
-h1 index
-
-.passwordForm
-	form(method='POST')
-		.form-group
-			label(for='password') Password
-			input.form-control#password(
-			placeholder="password" 
-			type="password" 
-			name="password"
-			required
-			)
-		.passwordForm__submit
-			input.btn(type="submit" value="click")
+extends partials/layout.pug
+block content
+	.container
+		h1 index
+		.passwordForm
+			form(method='POST')
+				.form-group
+					label(for='password') Password
+					input.form-control#password(
+					type="password" 
+					name="password"
+					required
+					)
+				.passwordForm__submit
+					input.btn.green.waves-light(type="submit" value="Connect")
 
 
 

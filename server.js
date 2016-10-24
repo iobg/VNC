@@ -37,7 +37,7 @@ const endRecording=()=>{
 	recording.kill()
 }
 const makePassword=()=>{
-	return Math.random().toString(36).slice(20)
+	return Math.random().toString(36).slice(-6)
 }
 const password = makePassword()
 
@@ -78,6 +78,7 @@ server.listen(3000,()=>{
 })
 
 io.on('connect',socket=>{
+	console.log(socket.id)
 	let shift=false;
 	socket.on('clientMouseClick',()=>{
 		robot.mouseClick()

@@ -3,7 +3,7 @@ const endBtn = document.getElementById('endBtn')
 const passwordGiven = document.getElementById('password')
 
 const {startServer,closeConnection,startRecording,endRecording,password} = require('../server')
-passwordGiven.innerText=password
+passwordGiven.innerText=`Password: ${password}`
 
 startBtn.addEventListener('click',()=>{
   startServer()

@@ -2,15 +2,29 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>VNC</title>
+    <link rel="stylesheet" type="text/css" href="../node_modules/materialize-css/dist/css/materialize.min.css"></style>
     <link rel="stylesheet" type="text/css" href="serverStyle.css"></style>
   </head>
-  <body>
-    <h1> electron</h1>
-    <btn value="start connection" id="startBtn"> Start</btn>
-    <btn value="end connection" id="endBtn"> End</btn>
-    <h2 id="password"> </h2>
-  </body>
+  <body class="container">
+    <div class="row">
+      <div class="card blue darken1 col s4 offset-s4">
+        <div class="card-content white-text">
+          <h5 id="password"></h5>
+        </div>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class='col s2 offset-s4'>
+        <a class='waves-effect waves-light btn-large green' value="start connection" id="startBtn"> Start</a>
+      </div>
+      <div class='col s2'>      
+        <a class='waves-effect waves-light btn-large red' value="end connection" id="endBtn"> End</a>
+      </div>
+    </div>
+  </body>
+  <script src='../node_modules/hammerjs/hammer.min.js'></script>
+  <script src='../node_modules/materialize-css/dist/js/materialize.min.js' type='text/javascript'></script>
   <script src="renderer.js" type="text/javascript" charset="utf-8" async defer></script>
 </html>
