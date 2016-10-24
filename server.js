@@ -5,12 +5,12 @@ const { Server }= require('http')
 const server = Server(app)
 const socketio = require('socket.io')
 const io = socketio(server)
-const fs = require('fs')
 const robot = require('robotjs')
 const { spawn } = require('child_process')
 const cors = require('cors')
 const enableDestroy = require('server-destroy')(server)
 const bodyParser = require('body-parser')
+const routes = require('./routes/routes')
 let recording=null
 
 
@@ -46,31 +46,8 @@ app.set('view engine', 'pug')
 app.use(express.static('public'));
 app.use(cors())
 app.use(bodyParser())
+app.use(routes)
 
-//routes
-app.get('/',(req,res)=>{
-	res.render('index')
-})
-app.post('/',(req,res)=>{
-	console.log(req.body)
-	if(req.body.password===password){
-		res.render('connection')
-	}
-	else res.render('index',{msg:"Incorrect password entered"})
-	
-
-})
-app.get('/stream.m3u8',(req,res)=>{
-	fs.createReadStream('videostream/stream.m3u8').pipe(res)
-})
-app.get('/:streamSegment',(req,res)=>{
-		let read=fs.createReadStream(`videostream/${req.params.streamSegment}`)
-		read.on('error',(err)=>{
-			console.log(err)
-		})
-		read.pipe(res)
-	
-})
 
 server.listen(3000,()=>{
 	console.log('server listening')
