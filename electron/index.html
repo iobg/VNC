@@ -7,19 +7,24 @@
     <link rel="stylesheet" type="text/css" href="serverStyle.css"></style>
   </head>
   <body>
-  <div class="card blue darken1">
-      <div class="card-content white-text">
-        <h5 id="password"></h5>
-      </div>
-  </div>
     <div class="row">
-      <div class='col s6'>
-        <a class='waves-effect waves-light btn' value="start connection" id="startBtn"> Start</a>
+      <div class="card blue darken1 col s4 offset-s4">
+        <div class="card-content white-text">
+          <h5 id="password"></h5>
+        </div>
       </div>
-      <div class='col s6'>      
-        <a class='waves-effect waves-light btn' value="end connection" id="endBtn"> End</a>
+    </div>
+
+    <div class="row">
+      <div class='col s2 offset-s4'>
+        <a class='waves-effect waves-light btn-large green' value="start connection" id="startBtn"> Start</a>
+      </div>
+      <div class='col s2'>      
+        <a class='waves-effect waves-light btn-large red' value="end connection" id="endBtn"> End</a>
       </div>
     </div>
   </body>
+  <script src='../node_modules/hammerjs/hammer.min.js'></script>
+  <script src='../node_modules/materialize-css/dist/js/materialize.min.js' type='text/javascript'></script>
   <script src="renderer.js" type="text/javascript" charset="utf-8" async defer></script>
 </html>
