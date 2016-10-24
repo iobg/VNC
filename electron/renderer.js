@@ -1,6 +1,9 @@
 const startBtn = document.getElementById('startBtn')
 const endBtn = document.getElementById('endBtn')
-const {startServer,closeConnection,startRecording,endRecording} = require('../server')
+const passwordGiven = document.getElementById('password')
+
+const {startServer,closeConnection,startRecording,endRecording,password} = require('../server')
+passwordGiven.innerText=password
 
 startBtn.addEventListener('click',()=>{
   startServer()
