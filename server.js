@@ -10,6 +10,7 @@ const robot = require('robotjs')
 const { spawn } = require('child_process')
 const cors = require('cors')
 const enableDestroy = require('server-destroy')(server)
+const bodyParser = require('body-parser')
 let recording=null
 
 
@@ -44,10 +45,20 @@ const startServer=()=>{
 app.set('view engine', 'pug')
 app.use(express.static('public'));
 app.use(cors())
+app.use(bodyParser())
+
 
 //routes
-app.get('/connect',(req,res)=>{
-	res.render('connection')
+app.get('/',(req,res)=>{
+	res.render('index')
+})
+app.post('/',(req,res)=>{
+	console.log(req.body)
+	if(req.params.passwordEntered===password){
+		res.render('connection')
+	}
+	else res.render('index',{msg:"Incorrect password entered"})
+	
 
 })
 app.get('/stream.m3u8',(req,res)=>{
