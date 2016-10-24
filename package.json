@@ -28,7 +28,8 @@
     "robotjs": "^0.4.4",
     "server-destroy": "^1.0.1",
     "socket.io": "^1.5.0",
-    "socket.io-client": "^1.5.1"
+    "socket.io-client": "^1.5.1",
+    "stream-server": "^0.5.1"
   },
   "devDependencies": {
     "electron-rebuild": "^1.2.1",
