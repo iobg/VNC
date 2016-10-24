@@ -23,10 +23,12 @@
     "cors": "^2.8.1",
     "electron": "^1.4.4",
     "express": "^4.14.0",
+    "materializecss": "^1.0.11",
     "pug": "^2.0.0-beta6",
     "robotjs": "^0.4.4",
     "server-destroy": "^1.0.1",
-    "socket.io": "^1.5.0"
+    "socket.io": "^1.5.0",
+    "socket.io-client": "^1.5.1"
   },
   "devDependencies": {
     "electron-rebuild": "^1.2.1",
