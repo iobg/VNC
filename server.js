@@ -47,14 +47,13 @@ app.use(express.static('public'));
 app.use(cors())
 app.use(bodyParser())
 
-
 //routes
 app.get('/',(req,res)=>{
 	res.render('index')
 })
 app.post('/',(req,res)=>{
 	console.log(req.body)
-	if(req.params.passwordEntered===password){
+	if(req.body.password===password){
 		res.render('connection')
 	}
 	else res.render('index',{msg:"Incorrect password entered"})
