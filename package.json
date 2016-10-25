@@ -6,10 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "rebuild": "npm rebuild --runtime=electron --target=1.4.3 --disturl=https://atom.io/download/atom-shell --abi=50",
-    "record": "ffmpeg -r 30 -f avfoundation -i 1 -f mpeg1video -b 800k http://127.0.0.1:8082/password/2560/1600",
-    "stream": "node ./node_modules/stream-server.js password"
-  },
+    "rebuild": "npm rebuild --runtime=electron --target=1.4.3 --disturl=https://atom.io/download/atom-shell --abi=50" 
+     },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iobg/VNC.git"
