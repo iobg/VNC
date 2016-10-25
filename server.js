@@ -33,7 +33,7 @@ app.use(bodyParser())
 app.use(routes)
 
 const startRecording=()=>{
- recording=spawn('ffmpeg', args )
+ // recording=spawn('ffmpeg', args )
 }
 const closeConnection=()=>{
 	server.destroy()

@@ -1,8 +1,7 @@
 extends partials/layout.pug
 block content
-		video#video(autoplay)
-		script(src='//releases.flowplayer.org/6.0.5/flowplayer.min.js')
-		script(src='//releases.flowplayer.org/hlsjs/flowplayer.hlsjs.min.js')
+		canvas(style='', width='1280', height='800', id="videoCanvas")
+		script(src='jsmpg.js')
 		script(src='/socket.io/socket.io.js')
 		script(src='main.js')
 
