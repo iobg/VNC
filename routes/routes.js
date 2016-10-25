@@ -13,20 +13,6 @@ app.post('/',(req,res)=>{
 		res.render('connection')
 	}
 	else res.render('index',{msg:"Incorrect password entered"})
-	
 
 })
-app.get('/stream.m3u8',(req,res)=>{
-	fs.createReadStream('videostream/stream.m3u8').pipe(res)
-})
-app.get('/:streamSegment',(req,res)=>{
-		let read=fs.createReadStream(`videostream/${req.params.streamSegment}`)
-		read.on('error',(err)=>{
-			console.log(err)
-		})
-		read.pipe(res)
-	
-})
-
-
 module.exports=app

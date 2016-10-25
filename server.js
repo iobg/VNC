@@ -12,23 +12,30 @@ const enableDestroy = require('server-destroy')(server)
 const bodyParser = require('body-parser')
 const routes = require('./routes/routes')
 let recording=null
+let stream = null
 
 
 //middleware
-let args = ['-r','24','-f','avfoundation',
-					  '-pixel_format','yuv420p','-i','1',
-					  '-vcodec','h264','-vf','scale=1280:800',
-					  '-preset','ultrafast','-tune','zerolatency',
-					  '-g','0','-hls_flags','delete_segments',
-					  '-hls_time','0.5','-hls_list_size','2', 
-					  '-hls_allow_cache','0','-segment_list_flags','+live',
-					  '-increment_tc', '1',
-					  '-hls_segment_filename','videostream/file%03d.ts',
-					  'videostream/stream.m3u8']
+let streamArgs=['./node_modules/stream-server.js', 'password']
 
+let recordArgs = ['-r', '30' ,'-f','avfoundation',
+						'-i','1','-f', 'mpeg1video',
+						 '-b', '800k',
+						 'http://127.0.0.1:8082/password/2560/1600']
+app.set('view engine', 'pug')
+app.use(express.static('public'));
+app.use(cors())
+app.use(bodyParser())
+app.use(routes)
 
 const startRecording=()=>{
- recording=spawn('ffmpeg', args )
+	return new Promise((resolve,reject)=>{
+		stream = spawn('node', streamArgs)
+		resolve()
+	}).then(()=>{
+		recording = spawn('ffmpeg', recordArgs )
+	})
+	
 }
 const closeConnection=()=>{
 	server.destroy()
@@ -42,12 +49,6 @@ const makePassword=()=>{
 const password = makePassword()
 
 const startServer=()=>{
-app.set('view engine', 'pug')
-app.use(express.static('public'));
-app.use(cors())
-app.use(bodyParser())
-app.use(routes)
-
 
 server.listen(3000,()=>{
 	console.log('server listening')

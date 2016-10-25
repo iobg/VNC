@@ -1,21 +1,14 @@
 const socket = io()
-const video = document.getElementById('video');
+  var client = new WebSocket( 'ws://127.0.0.1:8084/' );
 
-  if(Hls.isSupported()) {
-    var hls = new Hls({capLevelToPlayerSize:true});
-    hls.loadSource('stream.m3u8');
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED,function() {
-      video.play();
-  });
- }
- 
+    var canvas = document.getElementById('videoCanvas');
+    var player = new jsmpeg(client, {canvas:canvas});
 
-video.addEventListener('click',()=>{
+canvas.addEventListener('click',()=>{
 	socket.emit('clientMouseClick')
 })
 
-video.addEventListener('mousemove',event=>{
+canvas.addEventListener('mousemove',event=>{
 	mouseObj = {}
 	mouseObj.x = event.layerX
 	mouseObj.y = event.layerY

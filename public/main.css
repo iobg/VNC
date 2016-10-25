@@ -1,6 +1,8 @@
 body{
 	background:#6666FF;
 }
-#video{
+#videoCanvas{
 	margin-left:5%;
+	width:1280;
+	height:800;
 }
