@@ -20,7 +20,7 @@ let streamArgs=['./node_modules/stream-server.js', 'password']
 
 let recordArgs = ['-r', '30','-f','avfoundation',
 						'-i','1','-f', 'mpeg1video',
-						 '-b', '800k','-preset','ultrafast',
+						 '-b', '4500k', '-preset', 'ultrafast',
 						 '-s', '1280x800',
 						 'http://127.0.0.1:8082/password/1280/800']
 app.set('view engine', 'pug')
@@ -35,6 +35,9 @@ const startRecording=()=>{
 		resolve()
 	}).then(()=>{
 		recording = spawn('ffmpeg', recordArgs )
+		recording.stderr.on('data',data=>{
+			console.log(data.toString())
+		})
 	})
 	
 }
