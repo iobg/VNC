@@ -12,11 +12,13 @@ const enableDestroy = require('server-destroy')(server)
 const bodyParser = require('body-parser')
 const routes = require('./routes/routes')
 let recording=null
+let stream = null
 
 
 //middleware
+let streamArgs=['./node_modules/stream-server.js', 'password']
 
-let args = ['-r', '30' ,'-f','avfoundation',
+let recordArgs = ['-r', '30' ,'-f','avfoundation',
 						'-i','1','-f', 'mpeg1video',
 						 '-b', '800k',
 						 'http://127.0.0.1:8082/password/2560/1600']
@@ -27,7 +29,13 @@ app.use(bodyParser())
 app.use(routes)
 
 const startRecording=()=>{
- recording=spawn('ffmpeg', args )
+	return new Promise((resolve,reject)=>{
+		stream = spawn('node', streamArgs)
+		resolve()
+	}).then(()=>{
+		recording = spawn('ffmpeg', recordArgs )
+	})
+	
 }
 const closeConnection=()=>{
 	server.destroy()
