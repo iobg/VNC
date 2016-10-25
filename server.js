@@ -47,13 +47,8 @@ const endRecording=()=>{
 }
 
 
-
-
-
 const startServer=()=>{
 
-
-io.on('connect',socket=>{
 	console.log(socket.id)
 	let shift=false;
 	socket.on('clientMouseClick',()=>{
@@ -96,8 +91,8 @@ io.on('connect',socket=>{
 	socket.on('error',(err)=>{
 		console.log(err)
 	})
-})
 }
+
 
 module.exports={startServer,startRecording, endRecording, password}
 

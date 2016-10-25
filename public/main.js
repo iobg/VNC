@@ -12,7 +12,7 @@ canvas.addEventListener('mousemove',event=>{
 	mouseObj = {}
 	mouseObj.x = event.layerX
 	mouseObj.y = event.layerY
-	socket.emit('clientMouseMove',mouseObj)
+	socket.broadcast('clientMouseMove',mouseObj)
 })
 window.addEventListener('keydown',event=>{
   socket.emit('clientKeyPress',event.key)

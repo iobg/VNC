@@ -11,8 +11,6 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const routes = require('../routes/routes')
 
-
-
 let stream = spawn('node', streamArgs)
 
 app.set('view engine', 'pug')

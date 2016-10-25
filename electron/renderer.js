@@ -11,7 +11,7 @@ startBtn.addEventListener('click',()=>{
 })
 
 endBtn.addEventListener('click',()=>{
-	closeConnection()
+	// closeConnection()
 	endRecording()
 	console.log('end')
 })
