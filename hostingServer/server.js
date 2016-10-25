@@ -10,6 +10,7 @@ let streamArgs=['./node_modules/stream-server.js', 'password']
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const routes = require('../routes/routes')
+let desktop = null
 
 let stream = spawn('node', streamArgs)
 
@@ -22,7 +23,14 @@ app.use(routes)
 io.on('connect',socket=>{
 	console.log('connected')
 	socket.on('firstConnect', password=>{
-		module.exports=password
+		console.log(password)
+		module.exports={password}
+	})
+	socket.on('desktopId', id=>{
+		desktop=id
+	})
+	socket.on('clientMouseMove',mouseObj=>{
+		io.to(desktop).emit('clientMouseMove',mouseObj)
 	})
 })
 

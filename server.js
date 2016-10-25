@@ -21,7 +21,8 @@ const makePassword=()=>{
 const password = makePassword()
 
 socket.on('connect',()=>{
-	socket.emit('firstConnect', {password})
+	socket.emit('firstConnect', password)
+	socket.emit('desktopId', socket.id)
 })
 
 //middleware
@@ -34,9 +35,6 @@ let recordArgs = ['-r', '20','-f','avfoundation',
 
 const startRecording=()=>{
 		recording = spawn('ffmpeg', recordArgs )
-		recording.stderr.on('data',data=>{
-			console.log(data.toString())
-	})
 	
 }
 // const closeConnection=()=>{
@@ -48,8 +46,6 @@ const endRecording=()=>{
 
 
 const startServer=()=>{
-
-	console.log(socket.id)
 	let shift=false;
 	socket.on('clientMouseClick',()=>{
 		robot.mouseClick()

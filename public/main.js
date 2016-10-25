@@ -4,6 +4,7 @@
     var canvas = document.getElementById('videoCanvas');
     var player = new jsmpeg(client, {canvas:canvas});
 
+
 canvas.addEventListener('click',()=>{
 	socket.emit('clientMouseClick')
 })
@@ -12,7 +13,7 @@ canvas.addEventListener('mousemove',event=>{
 	mouseObj = {}
 	mouseObj.x = event.layerX
 	mouseObj.y = event.layerY
-	socket.broadcast('clientMouseMove',mouseObj)
+	socket.emit('clientMouseMove',mouseObj)
 })
 window.addEventListener('keydown',event=>{
   socket.emit('clientKeyPress',event.key)
