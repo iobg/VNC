@@ -18,10 +18,11 @@ let stream = null
 //middleware
 let streamArgs=['./node_modules/stream-server.js', 'password']
 
-let recordArgs = ['-r', '30' ,'-f','avfoundation',
+let recordArgs = ['-r', '30','-f','avfoundation',
 						'-i','1','-f', 'mpeg1video',
-						 '-b', '800k',
-						 'http://127.0.0.1:8082/password/2560/1600']
+						 '-b', '800k','-preset','ultrafast',
+						 '-s', '1280x800',
+						 'http://127.0.0.1:8082/password/1280/800']
 app.set('view engine', 'pug')
 app.use(express.static('public'));
 app.use(cors())
