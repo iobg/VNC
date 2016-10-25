@@ -1,5 +1,5 @@
-const socket = io()
-  var client = new WebSocket( 'ws://127.0.0.1:8084/' );
+  var client = new WebSocket( 'ws://192.168.0.16:8084/');
+  let socket= io(client)
 
     var canvas = document.getElementById('videoCanvas');
     var player = new jsmpeg(client, {canvas:canvas});
