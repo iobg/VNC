@@ -16,16 +16,10 @@ let recording=null
 
 //middleware
 
-let args = ['-r','24','-f','avfoundation',
-					  '-pixel_format','yuv420p','-i','1',
-					  '-vcodec','h264','-vf','scale=1280:800',
-					  '-preset','ultrafast','-tune','zerolatency',
-					  '-g','0','-hls_flags','delete_segments',
-					  '-hls_time','0.5','-hls_list_size','2', 
-					  '-hls_allow_cache','0','-segment_list_flags','+live',
-					  '-increment_tc', '1',
-					  '-hls_segment_filename','videostream/file%03d.ts',
-					  'videostream/stream.m3u8']
+let args = ['-r', '30' ,'-f','avfoundation',
+						'-i','1','-f', 'mpeg1video',
+						 '-b', '800k',
+						 'http://127.0.0.1:8082/password/2560/1600']
 app.set('view engine', 'pug')
 app.use(express.static('public'));
 app.use(cors())
@@ -33,7 +27,7 @@ app.use(bodyParser())
 app.use(routes)
 
 const startRecording=()=>{
- // recording=spawn('ffmpeg', args )
+ recording=spawn('ffmpeg', args )
 }
 const closeConnection=()=>{
 	server.destroy()
