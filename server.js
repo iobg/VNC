@@ -1,19 +1,10 @@
 'use strict'
-// const express=require('express')
-// const app = express()
-// const { Server }= require('http')
-// const server = Server(app)
-// const socketio = require('socket.io')
 const io = require('socket.io-client')
 const socket = new io.connect('http://localhost:3000')
 const robot = require('robotjs')
 const { spawn } = require('child_process')
-const cors = require('cors')
-// const enableDestroy = require('server-destroy')(server)
-// const bodyParser = require('body-parser')
-// const routes = require('./routes/routes')
+
 let recording=null
-let stream = null
 
 const makePassword=()=>{
 	return Math.random().toString(36).slice(-6)
@@ -25,8 +16,6 @@ socket.on('connect',()=>{
 	socket.emit('desktopId', socket.id)
 })
 
-//middleware
-
 let recordArgs = ['-r', '20','-f','avfoundation',
 						'-i','1','-f', 'mpeg1video',
 						 '-b', '4000k', '-preset', 'ultrafast',
@@ -35,15 +24,10 @@ let recordArgs = ['-r', '20','-f','avfoundation',
 
 const startRecording=()=>{
 		recording = spawn('ffmpeg', recordArgs )
-	
 }
-// const closeConnection=()=>{
-// 	server.destroy()
-// }
 const endRecording=()=>{
 	recording.kill()
 }
-
 
 const startServer=()=>{
 	let shift=false;
