@@ -32,6 +32,15 @@ io.on('connect',socket=>{
 	socket.on('clientMouseMove',mouseObj=>{
 		io.to(desktop).emit('clientMouseMove',mouseObj)
 	})
+	socket.on('clientKeyPress',key=>{
+		io.to(desktop).emit('clientkeyPress',key)
+	})
+	socket.on('shiftPressed',key=>{
+		io.to(desktop).emit('shiftPressed',key)
+	})
+	socket.on('shiftReleased',key=>{
+		io.to(desktop).emit('shiftReleased',key)
+	})
 })
 
 server.listen(3000,()=>{
