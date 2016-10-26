@@ -20,7 +20,7 @@ let recordArgs = ['-r', '20','-f','avfoundation',
 						'-i','1','-f', 'mpeg1video',
 						 '-b', '4000k', '-preset', 'ultrafast',
 						 '-s', '1280x800',
-						 'http://127.0.0.1:8082/password/1280/800']
+						 'http://myvnc.herokuapp.com:8082/password/1280/800']
 
 const startRecording=()=>{
 		recording = spawn('ffmpeg', recordArgs )
