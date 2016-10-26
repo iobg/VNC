@@ -1,4 +1,5 @@
-  var client = new WebSocket( 'wss://myvnc.herokuapp.com' );
+  let HOST = location.origin.replace(/^http/, 'ws')
+  var client = new WebSocket( HOST );
   let socket= io(client)
 
 
