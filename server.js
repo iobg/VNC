@@ -1,6 +1,6 @@
 'use strict'
 const io = require('socket.io-client')
-const socket = new io.connect('http://localhost:3000')
+const socket = new io.connect('http://myvnc.herokuapp.com')
 const robot = require('robotjs')
 const { spawn } = require('child_process')
 
