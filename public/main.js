@@ -12,6 +12,9 @@ fsBtn.addEventListener('click',()=>{
 canvas.addEventListener('click',()=>{
 	socket.emit('clientMouseClick')
 })
+canvas.addEventListener('touchstart',()=>{
+  canvas.focus()
+})
 
 canvas.addEventListener('mousemove',event=>{
 	mouseObj = {}
