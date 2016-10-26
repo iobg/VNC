@@ -1,66 +1,35 @@
 'use strict'
-const express=require('express')
-const app = express()
-const { Server }= require('http')
-const server = Server(app)
-const socketio = require('socket.io')
-const io = socketio(server)
+const io = require('socket.io-client')
+const socket = new io.connect('http://localhost:3000')
 const robot = require('robotjs')
 const { spawn } = require('child_process')
-const cors = require('cors')
-const enableDestroy = require('server-destroy')(server)
-const bodyParser = require('body-parser')
-const routes = require('./routes/routes')
+
 let recording=null
-let stream = null
 
-
-//middleware
-let streamArgs=['./node_modules/stream-server.js', 'password']
-
-let recordArgs = ['-r', '30','-f','avfoundation',
-						'-i','1','-f', 'mpeg1video',
-						 '-b', '4500k', '-preset', 'ultrafast',
-						 '-s', '1280x800',
-						 'http://127.0.0.1:8082/password/1280/800']
-app.set('view engine', 'pug')
-app.use(express.static('public'));
-app.use(cors())
-app.use(bodyParser())
-app.use(routes)
-
-const startRecording=()=>{
-	return new Promise((resolve,reject)=>{
-		stream = spawn('node', streamArgs)
-		resolve()
-	}).then(()=>{
-		recording = spawn('ffmpeg', recordArgs )
-		recording.stderr.on('data',data=>{
-			console.log(data.toString())
-		})
-	})
-	
-}
-const closeConnection=()=>{
-	server.destroy()
-}
-const endRecording=()=>{
-	recording.kill()
-}
 const makePassword=()=>{
 	return Math.random().toString(36).slice(-6)
 }
 const password = makePassword()
 
-const startServer=()=>{
-
-server.listen(3000,()=>{
-	console.log('server listening')
-		
+socket.on('connect',()=>{
+	socket.emit('firstConnect', password)
+	socket.emit('desktopId', socket.id)
 })
 
-io.on('connect',socket=>{
-	console.log(socket.id)
+let recordArgs = ['-r', '20','-f','avfoundation',
+						'-i','1','-f', 'mpeg1video',
+						 '-b', '4000k', '-preset', 'ultrafast',
+						 '-s', '1280x800',
+						 'http://127.0.0.1:8082/password/1280/800']
+
+const startRecording=()=>{
+		recording = spawn('ffmpeg', recordArgs )
+}
+const endRecording=()=>{
+	recording.kill()
+}
+
+const startServer=()=>{
 	let shift=false;
 	socket.on('clientMouseClick',()=>{
 		robot.mouseClick()
@@ -102,8 +71,8 @@ io.on('connect',socket=>{
 	socket.on('error',(err)=>{
 		console.log(err)
 	})
-})
 }
 
-module.exports={startServer,closeConnection,startRecording, endRecording, password}
+
+module.exports={startServer,startRecording, endRecording, password}
 

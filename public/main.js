@@ -1,8 +1,9 @@
-  var client = new WebSocket( 'ws://192.168.0.16:8084/');
+  var client = new WebSocket( 'ws://10.0.0.166:8084/');
   let socket= io(client)
 
     var canvas = document.getElementById('videoCanvas');
     var player = new jsmpeg(client, {canvas:canvas});
+
 
 canvas.addEventListener('click',()=>{
 	socket.emit('clientMouseClick')
