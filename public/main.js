@@ -1,8 +1,9 @@
-  var client = new WebSocket( 'wss://myvnc.herokuapp.com/');
-  let socket= io(client)
+  // var client = new WebSocket( 'wss://myvnc.herokuapp.com' );
+  let socket= new io.Socket()
+  socket.connect('http://myvnc.herokuapp.com:8084')
 
     var canvas = document.getElementById('videoCanvas');
-    var player = new jsmpeg(client, {canvas:canvas});
+    var player = new jsmpeg(socket, {canvas:canvas});
 
 
 canvas.addEventListener('click',()=>{
