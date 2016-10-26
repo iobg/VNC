@@ -33,9 +33,13 @@ const startServer=()=>{
 	let shift=false;
 	socket.on('clientMouseClick',()=>{
 		robot.mouseClick()
+		console.log('click')
 	})
 	socket.on('clientMouseMove',mouseObj=>{
-		robot.moveMouse(mouseObj.x,mouseObj.y)
+		let x = mouseObj.x * 1280
+		let y = mouseObj.y * 800
+		console.log(x,y)
+		robot.moveMouse(x,y)
 	})
 	socket.on('clientKeyPress',key=>{
 		console.log(key)

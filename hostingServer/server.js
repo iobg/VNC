@@ -28,12 +28,16 @@ io.on('connect',socket=>{
 	})
 	socket.on('desktopId', id=>{
 		desktop=id
+		console.log(desktop)
+	})
+	socket.on('clientMouseClick',()=>{
+		io.to(desktop).emit('clientMouseClick')
 	})
 	socket.on('clientMouseMove',mouseObj=>{
 		io.to(desktop).emit('clientMouseMove',mouseObj)
 	})
 	socket.on('clientKeyPress',key=>{
-		io.to(desktop).emit('clientkeyPress',key)
+		io.to(desktop).emit('clientKeyPress',key)
 	})
 	socket.on('shiftPressed',key=>{
 		io.to(desktop).emit('shiftPressed',key)
