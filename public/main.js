@@ -1,4 +1,4 @@
-  var client = new WebSocket( 'wss://myvnc.herokuapp.com' );
+  var client = new WebSocket( 'wss://myvnc.herokuapp.com:8084' );
   let socket= io(client)
 
 
