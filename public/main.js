@@ -1,5 +1,5 @@
   let HOST = location.origin.replace(/^http/, 'ws')
-  var client = new WebSocket( HOST );
+  var client = new WebSocket( `${HOST}:8084` );
   let socket= io(client)
 
 
