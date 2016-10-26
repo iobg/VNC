@@ -13,7 +13,7 @@ const routes = require('../routes/routes')
 let desktop = null
 
 let stream = spawn('node', streamArgs)
-
+const PORT = process.env.PORT || 3000
 app.set('view engine', 'pug')
 app.use(express.static('public'));
 app.use(cors())
@@ -43,7 +43,7 @@ io.on('connect',socket=>{
 	})
 })
 
-server.listen(3000,()=>{
+server.listen(PORT,()=>{
 	console.log('server listening')
 })
 
