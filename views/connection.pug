@@ -1,6 +1,7 @@
 extends partials/layout.pug
 block content
 		canvas(style='', width='1280', height='800', id="videoCanvas")
+		input.btn.green.waves-light(id="fullscreen" value="fullscreen")
 		script(src='bower_components/jsmpg.js')
 		script(src='/socket.io/socket.io.js')
 		script(src='main.js')
