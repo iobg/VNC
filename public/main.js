@@ -1,9 +1,13 @@
   var client = new WebSocket( 'ws://10.0.0.166:8084/');
-  let socket= io()
+  let socket= io(client)
 
-    var canvas = document.getElementById('videoCanvas');
-    var player = new jsmpeg(client, {canvas:canvas});
+    let canvas = document.getElementById('videoCanvas');
+    let player = new jsmpeg(client, {canvas:canvas});
+    let fsBtn = document.getElementById('fullscreen')
 
+fsBtn.addEventListener('click',()=>{
+  canvas.webkitRequestFullScreen()
+})
 
 canvas.addEventListener('click',()=>{
 	socket.emit('clientMouseClick')
