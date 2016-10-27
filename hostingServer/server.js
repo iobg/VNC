@@ -6,14 +6,14 @@ const server = Server(app)
 const socketio = require('socket.io')
 const io = socketio(server)
 const { spawn } = require('child_process')
-let streamArgs=['./node_modules/stream-server.js', 'password']
+let streamArgs=['./stream-server.js', 'password']
 // const cors = require('cors')
 const bodyParser = require('body-parser')
 const routes = require('../routes/routes')
 let desktop = null
 
 let stream = spawn('node', streamArgs)
-
+const PORT = process.env.PORT || 3000
 app.set('view engine', 'pug')
 app.use(express.static('public'));
 // app.use(cors())

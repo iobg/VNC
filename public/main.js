@@ -1,4 +1,4 @@
-  var client = new WebSocket( 'ws://10.0.0.166:8084/');
+  var client = new WebSocket( 'wss://myvnc.herokuapp.com');
   let socket= io(client)
 
     let canvas = document.getElementById('videoCanvas');
