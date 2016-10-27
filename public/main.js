@@ -31,3 +31,7 @@ window.addEventListener('keydown',event=>{
 window.addEventListener('keyup',event=>{
   if(event.key==="Shift") socket.emit('shiftReleased',event.key)
 })
+window.addEventListener('mousewheel',event=>{
+  socket.emit('clientScroll',event.wheelDeltaY)
+},{passive:true})
+ 
