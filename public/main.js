@@ -1,8 +1,9 @@
-  // var client = new WebSocket( 'wss://myvnc.herokuapp.com');
+  var HOST = location.origin.replace(/^http/, 'ws')
+  var client = new WebSocket(HOST);
   let socket= io()
 
     let canvas = document.getElementById('videoCanvas');
-    let player = new jsmpeg(socket, {canvas:canvas});
+    let player = new jsmpeg(client, {canvas:canvas});
     let fsBtn = document.getElementById('fullscreen')
 
 fsBtn.addEventListener('click',()=>{
