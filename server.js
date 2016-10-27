@@ -17,8 +17,8 @@ socket.on('connect',()=>{
 })
 
 let recordArgs = ['-r','20','-f','avfoundation',
-						'-i','1','-b', '2500k', '-preset', 'veryslow', '-tune',
-						 'zerolatency','-f', 'mpeg1video',
+						'-i','1', '-b','4000k','-maxrate', '5000k', '-crf', '18', '-bufsize','2000k', 
+						'-preset', 'veryslow','-f', 'mpeg1video',
 						 '-s', '1280x800', '-preset', 'ultrafast',
 						 'http://127.0.0.1:8082/password/1280/800']
 
