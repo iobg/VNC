@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "engines":{
+    "node": "6"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
-    "rebuild": "npm rebuild --runtime=electron --target=1.4.3 --disturl=https://atom.io/download/atom-shell --abi=50" 
+    "start": "node hostingServer/server.js",
+    "rebuild": "npm rebuild --runtime=electron --target=1.4.3 --disturl=https://atom.io/download/atom-shell --abi=50",
+    "postinstall": "bower install" 
      },
   "repository": {
     "type": "git",
