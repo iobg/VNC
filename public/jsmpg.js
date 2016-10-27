@@ -390,7 +390,7 @@ jsmpeg.prototype.load = function( url ) {
 
 		request.open('GET', url);
 		request.responseType = 'arraybuffer';
-		request.send();
+		// request.send();
 	}
 };
 
