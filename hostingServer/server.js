@@ -56,7 +56,7 @@ io.on('connect',socket=>{
 })
 
 
-server.listen(3000,()=>{
+server.listen(PORT,()=>{
 	console.log('server listening')
 })
 
