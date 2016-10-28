@@ -7,7 +7,6 @@ const socketio = require('socket.io')
 const io = socketio(server)
 const { spawn } = require('child_process')
 let streamArgs=['./node_modules/stream-server.js', 'password']
-// const cors = require('cors')
 const bodyParser = require('body-parser')
 const routes = require('../routes/routes')
 let desktop = null
@@ -16,7 +15,6 @@ let stream = spawn('node', streamArgs)
 
 app.set('view engine', 'pug')
 app.use(express.static('public'));
-// app.use(cors())
 app.use((req,res,next)=>{
 	res.header("Access-Control-Allow-Origin", "*")
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
