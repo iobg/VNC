@@ -15,14 +15,25 @@ socket.on('connect',()=>{
 	socket.emit('firstConnect', password)
 	socket.emit('desktopId', socket.id)
 })
-
-let recordArgs = ['-r','20','-f','avfoundation',
-						'-i','1', '-b','4000k','-maxrate', '10000k', 
-						 '-bufsize','2000k', 
-						'-preset', 'veryslow','-q:v', '8','-f', 'mpeg1video',
-						 '-s', '1280x800', '-preset', 'ultrafast',
-						 'http://127.0.0.1:8082/password/1280/800']
-
+const checkOs=()=>{
+	if(process.platform==="darwin"){
+		return ['-r','20','-f','avfoundation',
+				'-i','1', '-b:v','4000k','-maxrate', '10000k', 
+				 '-bufsize','2000k', 
+				 '-preset', 'veryslow','-q:v', '8','-f', 'mpeg1video',
+				 '-s', '1280x800', '-preset', 'ultrafast',
+				 'http://127.0.0.1:8082/password/1280/800']
+	}
+	else if(process.platform==="win32"){
+		return ['-r','20','-f','dshow',
+				'-i','video=screen-capture-recorder', '-b:v','4000k','-maxrate', '10000k', 
+				 '-bufsize','2000k', 
+				 '-preset', 'veryslow','-q:v', '8','-f', 'mpeg1video',
+				 '-s', '1280x800', '-preset', 'ultrafast',
+				 'http://127.0.0.1:8082/password/1280/800']
+	}
+}
+let recordArgs = checkOs()
 const startRecording=()=>{
 		recording = spawn('ffmpeg', recordArgs )
 		recording.stderr.on('data',data=>{
