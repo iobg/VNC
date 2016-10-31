@@ -5,13 +5,24 @@ const passwordGiven = document.getElementById('password')
 const {startServer,startRecording,endRecording,password} = require('../server')
 passwordGiven.innerText=`Password: ${password}`
 
+let currentlyRecording = false;
+
 startBtn.addEventListener('click',()=>{
-  startServer()
-  startRecording()
+	if(!currentlyRecording){
+		startServer()
+  	startRecording()
+  	currentlyRecording=true;
+  }
 })
+	
+ 
 
 endBtn.addEventListener('click',()=>{
-	endRecording()
-	console.log('end')
+	if(currentlyRecording){
+		endRecording()
+		currentlyRecording=false
+		console.log('end')
+	}
+	
 })
 
