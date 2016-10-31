@@ -52,8 +52,6 @@ io.on('connect',socket=>{
 	io.to(desktop).emit('clientScroll', wheelDeltaY)
 })
 })
-
-
 server.listen(3000,()=>{
 	console.log('server listening')
 })
