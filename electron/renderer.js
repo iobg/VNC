@@ -17,7 +17,6 @@ startBtn.addEventListener('click',()=>{
   	currentlyRecording=true;
   }
 })
-	
 
 endBtn.addEventListener('click',()=>{
 	if(currentlyRecording){
