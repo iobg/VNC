@@ -1,7 +1,14 @@
 body{
 	background:#6666FF;
+	color:#FFD9CE;
 }
 #videoCanvas{
 	width:100vw;
 	height:100vh;
+}
+#passwordInput{
+	height:75vh;
+}
+#password{
+	margin-top:10%;
 }
