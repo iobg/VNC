@@ -1,6 +1,6 @@
 body{
 	background:#6666FF;
-	color:#FFD9CE;
+	color:#8EF9F3;
 }
 #videoCanvas{
 	width:100vw;
@@ -10,5 +10,8 @@ body{
 	height:75vh;
 }
 #password{
-	margin-top:10%;
+	margin-top:5%;
+}
+#formHeader{
+	color:#FFD9CE;
 }
