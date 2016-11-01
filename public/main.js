@@ -12,10 +12,6 @@ fsBtn.addEventListener('click',()=>{
 canvas.addEventListener('click',()=>{
 	socket.emit('clientMouseClick')
 })
-canvas.addEventListener('touchstart',()=>{
-  canvas.focus()
-})
-
 canvas.addEventListener('mousemove',event=>{
 	mouseObj = {}
 	mouseObj.x = event.layerX/ window.innerWidth
@@ -36,7 +32,7 @@ canvas.addEventListener('mousewheel',event=>{
 },{passive:true})
 canvas.addEventListener('contextmenu',event=>{
   event.preventDefault()
-  console.log('right click')
+  socket.emit('clientRightclick')
   return false
 }, false)
  

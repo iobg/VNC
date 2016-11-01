@@ -59,6 +59,10 @@ const startServer=()=>{
 	socket.on('clientMouseClick',()=>{
 		robot.mouseClick()
 	})
+	socket.on('clientRightClick',()=>{
+		robot.mouseClick('right')
+		console.log('right click')
+	})
 	socket.on('clientMouseMove',mouseObj=>{
 		let x = mouseObj.x * 1280
 		let y = mouseObj.y * 800
