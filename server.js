@@ -46,9 +46,6 @@ const checkOs=()=>{
 let recordArgs = checkOs()
 const startRecording=()=>{
 		recording = spawn('ffmpeg', recordArgs )
-		recording.stderr.on('data',data=>{
-			console.log(data.toString())
-		})
 }
 const endRecording=()=>{
 	recording.kill()
@@ -58,6 +55,9 @@ const startServer=()=>{
 	let shift=false;
 	socket.on('clientMouseClick',()=>{
 		robot.mouseClick()
+	})
+	socket.on('clientRightClick',()=>{
+		robot.mouseClick('right')
 	})
 	socket.on('clientMouseMove',mouseObj=>{
 		let x = mouseObj.x * 1280
