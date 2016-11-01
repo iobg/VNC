@@ -18,21 +18,21 @@ canvas.addEventListener('mousemove',event=>{
 	mouseObj.y = event.layerY/ window.innerHeight
 	socket.emit('clientMouseMove',mouseObj)
 })
-canvas.addEventListener('keydown',event=>{
+window.addEventListener('keydown',event=>{
   socket.emit('clientKeyPress',event.key)
   })
-canvas.addEventListener('keydown',event=>{
+window.addEventListener('keydown',event=>{
   if(event.key==="Shift") socket.emit('shiftPressed',event.key)
   })
-canvas.addEventListener('keyup',event=>{
+window.addEventListener('keyup',event=>{
   if(event.key==="Shift") socket.emit('shiftReleased',event.key)
 })
-canvas.addEventListener('mousewheel',event=>{
+window.addEventListener('mousewheel',event=>{
   socket.emit('clientScroll',event.wheelDeltaY)
 },{passive:true})
 canvas.addEventListener('contextmenu',event=>{
   event.preventDefault()
-  socket.emit('clientRightclick')
+  socket.emit('clientRightClick')
   return false
 }, false)
  
