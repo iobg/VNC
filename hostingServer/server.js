@@ -6,12 +6,15 @@ const server = Server(app)
 const socketio = require('socket.io')
 const io = socketio(server)
 const { spawn } = require('child_process')
-let streamArgs=['./node_modules/stream-server.js', 'password']
+let streamArgs=['./hostingServer/stream-server.js', 'password']
 const bodyParser = require('body-parser')
 const routes = require('../routes/routes')
 let desktop = null
 
 let stream = spawn('node', streamArgs)
+stream.stderr.on('data',data=>{
+	console.log(data.toString())
+})
 
 app.set('view engine', 'pug')
 app.use(express.static('public'));
@@ -31,7 +34,6 @@ io.on('connect',socket=>{
 	})
 	socket.on('desktopId', id=>{
 		desktop=id
-		console.log(desktop)
 	})
 	socket.on('clientMouseClick',()=>{
 		io.to(desktop).emit('clientMouseClick')
@@ -49,7 +51,7 @@ io.on('connect',socket=>{
 		io.to(desktop).emit('shiftReleased',key)
 	})
 	socket.on('clientScroll',wheelDeltaY=>{
-	io.to(desktop).emit('clientScroll', wheelDeltaY)
+		io.to(desktop).emit('clientScroll', wheelDeltaY)
 })
 	socket.on('clientRightClick',()=>{
 		io.to(desktop).emit('clientRightClick')
